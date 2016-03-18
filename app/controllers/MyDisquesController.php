@@ -31,7 +31,7 @@ class MyDisquesController extends \ControllerBase{
 		//$glButton2->onClick($this->jquery->show("#panel",2000));
 		
 		$liste=$this->jquery->bootstrap()->htmlListgroup("liste");
-		MyDisquesController::progressbarAction();
+		$this->progressbarAction();
 		
 		$this->jquery->compile($this->view);	
 	}

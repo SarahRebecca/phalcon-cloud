@@ -9,3 +9,6 @@ A Phalcon and Phalcon-jQuery web application
 - [x] read the project specifications : [Cloud specifications](http://slamwi.kobject.net/slam4/php/phalcon/project/cloud).
 - [x] do some regular commits and pushs 
 
+
+Sarah Daguin
+
