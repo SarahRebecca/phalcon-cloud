@@ -1,10 +1,10 @@
 //TODO 4.2 Mes disques
 
-<h1>Mes disques -> {{user}} </h1>
+<h1>Mes disques -> <?php echo $user; ?> </h1>
 
-{{q["glButton1"]}}
+<?php echo $q['glButton1']; ?>
 
-{{q["liste"]}}
+<?php echo $q['liste']; ?>
 
 <?php
 	foreach ($disques as $disque) {
