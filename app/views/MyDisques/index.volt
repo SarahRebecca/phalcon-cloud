@@ -1,4 +1,4 @@
-//TODO 4.2 Mes disques
+<?php //TODO 4.2 Mes disques ?>
 
 <h1>Mes disques -> {{user}} </h1>
 
@@ -10,6 +10,7 @@
 	foreach ($disques as $disque) {
 	$tarif = ModelUtils::getDisqueTarif($disque);
 	$occupation = ModelUtils::getDisqueOccupation($cloud,$disque);
+
 		echo '<li class="list-group-item"><h4>'. $disque->nom ."</h4>";
 		
 		$quota=$tarif->getQuota();

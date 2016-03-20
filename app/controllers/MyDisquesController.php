@@ -25,10 +25,10 @@ class MyDisquesController extends \ControllerBase{
 		//$idDisque=$disques->getId();
 		
 		$glButton1=$this->jquery->bootstrap()->HtmlGlyphButton("glButton1","glyphicon-plus","Creer un disque");
-		//$glButton1->getOnClick("Scan/index/$idDisque","#Scan");
+		$glButton1->onClick($this->jquery->show("#frm"));
 		
 		$glButton2=$this->jquery->bootstrap()->HtmlGlyphButton("glButton2","glyphicon-folder-open","Ouvrir");
-		//$glButton2->onClick($this->jquery->show("#panel",2000));
+		$glButton2->onClick($this->jquery->show("#Scan"));
 		
 		$liste=$this->jquery->bootstrap()->HtmlListgroup("liste");
 		
