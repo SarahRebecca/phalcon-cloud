@@ -10,6 +10,26 @@
 				<!--
 				//TODO 4.3 implémenter à partir de DisqueController/indexAction
 				-->
+				<?php echo $q['liste']; ?>
+				<li class="list-group-item">Caracteristique du disque</li>
+				<li class="list-group-item"><b>Nom : </b><?php echo $diskName; ?> <?php echo $q['btnModifNom']; ?></li>
+				<li class="list-group-item"><b>Proprietaire : </b><?php echo $user; ?></li>
+				<li class="list-group-item"><h3>Occupation</h3><?php echo $occupation; ?> <?php echo $unite; ?>
+					(<?php echo $pourcentage; ?>%) sur <?php echo $quota; ?> <?php echo $unite; ?></li>
+				<li class="list-group-item"><h3>Tarification</h3>
+					Prix : <?php echo $prix; ?>euros, Marge de depassement : <?php echo $marge; ?>%, cout depassement : <?php echo $cout; ?>euros</br>
+					<?php echo $q['btnModifTarif']; ?>
+				</li>	
+				<li class="list-group-item"><h3>Services</h3>
+					<?php
+						foreach ($services as $serv){
+							$idService=$serv->getIdService();
+							$service = Service::findFirst("id = $idService");
+							$serviceName=$service->getNom();
+							echo '<span class="label label-success">'.$serviceName.'</span>   ';
+						}
+					?>
+				</li>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="Listing">
 				<div class="btn-toolbar">

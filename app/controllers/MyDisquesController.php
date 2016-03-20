@@ -22,18 +22,17 @@ class MyDisquesController extends \ControllerBase{
 		));
 
 		$this->view->setVar("disques", $disques);
-		//$this->view->setVar("tarif", $tarif);	
+		//$idDisque=$disques->getId();
 		
 		$glButton1=$this->jquery->bootstrap()->HtmlGlyphButton("glButton1","glyphicon-plus","Creer un disque");
-		//$glButton1->onClick($this->jquery->show("#panel",2000));
+		//$glButton1->getOnClick("Scan/index/$idDisque","#Scan");
 		
 		$glButton2=$this->jquery->bootstrap()->HtmlGlyphButton("glButton2","glyphicon-folder-open","Ouvrir");
 		//$glButton2->onClick($this->jquery->show("#panel",2000));
 		
-		$liste=$this->jquery->bootstrap()->htmlListgroup("liste");
-		$this->progressbarAction();
+		$liste=$this->jquery->bootstrap()->HtmlListgroup("liste");
 		
-		$this->jquery->compile($this->view);	
+		$this->jquery->compile($this->view);
 	}
 	
 	public function progressbarAction(){

@@ -8,9 +8,51 @@ class ScanController extends ControllerBase {
 	 */
 	public function indexAction($idDisque) {
 		//TODO 4.3
-		$diskName="nom du disque.......................";
+		$controller=$this;
+		$user=Auth::getUser($controller);
+		$idUtilisateur=$user->getId();
+		
+		$disque = Disque::findFirst(array(
+				"idUtilisateur = $idUtilisateur",
+				"id = $idDisque",
+				"order" => "nom"
+		));
+		$services = DisqueService::find("idDisque = $idDisque");
+		
+		$cloud = $this->config->cloud;
+		$diskName=$disque->getNom();
+		$tarif = ModelUtils::getDisqueTarif($disque);
+		$quota=$tarif->getQuota();
+		$occupation = ModelUtils::getDisqueOccupation($cloud,$disque);
+		$prix=$tarif->getPrix();
+		$marge=($tarif->getMargeDepassement())*100;
+		$cout=$tarif->getCoutDepassement();
+		
+		if(strlen($occupation)<=7){
+			$occupation=round($occupation/ModelUtils::sizeConverter("Ko"),2);
+			$unite="Ko";
+		}else{
+			$occupation=round($occupation/ModelUtils::sizeConverter("Mo"),2);
+			$unite="Mo";
+		}
+		$pourcentage=round(($occupation/$quota)*100,2);
+		
+		$liste=$this->jquery->bootstrap()->HtmlListgroup("liste");
+		$btnModifNom=$this->jquery->bootstrap()->HtmlGlyphButton("btnModifNom","glyphicon-edit","Modifier...");
+		
+		$btnModifTarif=$this->jquery->bootstrap()->HtmlGlyphButton("btnModifTarif","glyphicon-edit","Modifier la tarification");
 
-
+		$this->view->setVar("diskName", $diskName);
+		$this->view->setVar("user", $user);
+		$this->view->setVar("occupation", $occupation);
+		$this->view->setVar("quota", $quota);
+		$this->view->setVar("unite", $unite);
+		$this->view->setVar("pourcentage", $pourcentage);
+		$this->view->setVar("marge", $marge);
+		$this->view->setVar("prix", $prix);
+		$this->view->setVar("cout", $cout);
+		$this->view->setVar("services", $services);
+		
 		$this->jquery->execOn("click", "#ckSelectAll", "$('.toDelete').prop('checked', $(this).prop('checked'));$('#btDelete').toggle($('.toDelete:checked').length>0)");
 		$this->jquery->execOn("click","#btUpload","$('#tabsMenu a:last').tab('show');");
 		$this->jquery->doJQueryOn("click","#btDelete", "#panelConfirmDelete", "show");
